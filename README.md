@@ -4,6 +4,8 @@ Framework de Automação de Testes Funcionais com padrão BDD para aplicações 
 
 ## Releases
 
+- 1.0 (03/07/2018) - Framework pré estabelido
+
 ## Getting Started
 
 Manual de instalação para execução do Framework
