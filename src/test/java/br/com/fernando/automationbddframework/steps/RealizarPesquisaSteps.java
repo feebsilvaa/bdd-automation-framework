@@ -3,30 +3,56 @@ package br.com.fernando.automationbddframework.steps;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
+
+
 import br.com.fernando.automationbddframework.core.BaseSteps;
-import br.com.fernando.automationbddframework.pages.Page;
+import br.com.fernando.automationbddframework.pages.HomePage;
+import br.com.fernando.automationbddframework.pages.ResultPage;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.Ent√£o;
+import cucumber.api.java.pt.Ent„o;
 import cucumber.api.java.pt.Quando;
 
 public class RealizarPesquisaSteps {
 	
 	private BaseSteps bs = new BaseSteps();
-	private Page page = new Page();
+	private HomePage homePage = new HomePage();
+	private ResultPage resultPage = new ResultPage();
 	
+	// Hooks
+	@Before(value= {"@pesquisaGoogle"})
+	public void setupTest() throws IOException {
+		bs.setTestName(RealizarPesquisaSteps.class.getSimpleName());
+		bs.setUpTest();		
+	}
 	
-	@Dado("^que estou na p√°gina inicial$")
-	public void queEstouNaP√°ginaInicial() throws Throwable {
-		String tituloPagina = page.tituloPagina();
-		assertThat(tituloPagina, is("Google"));		
+	@After(value= {"@pesquisaGoogle"})
+	public void tearDownTest( ) {
+		bs.tearDownTest();
+	}
+	
+	// Cen·rio
+	@Dado("^que estou na p·gina inicial$")
+	public void queEstouNaPaginaInicial() throws Throwable {
+		String tituloPagina = homePage.tituloPagina();
+		assertThat(tituloPagina, is("Google"));
 	}
 
-	@Quando("^eu pesquisar por \"([^\"]*)\"$")
-	public void euPesquisarPor(String arg1) throws Throwable {
+	@Quando("^eu pesquisar por ([^\"]*)$")
+	public void euPesquisarPor(String texto) throws Throwable {
+		bs.evidence();
+		homePage.typeFldPesquisar(texto);
+		bs.evidence();
+		homePage.submeterFormulario();
 	}
 
-	@Ent√£o("^devo ver resultados de pesquisa sobre \"([^\"]*)\"$")
-	public void devoVerResultadosDePesquisaSobre(String arg1) throws Throwable {
+	@Ent„o("^devo ver resultados de pesquisa sobre ([^\"]*)$")
+	public void devoVerResultadosDePesquisaSobre(String expect) throws Throwable {	
+		bs.evidence();
+		assertThat(resultPage.validarResultado(expect), is(true));		
+		bs.setResultadoDoTeste("Passed");
 	}
 	
 }

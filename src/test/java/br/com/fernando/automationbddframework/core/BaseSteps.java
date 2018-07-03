@@ -2,9 +2,12 @@ package br.com.fernando.automationbddframework.core;
 
 import static br.com.fernando.automationbddframework.core.DriverFactory.killDriver;
 import static br.com.fernando.automationbddframework.support.Generator.arquivoSaidaDocx;
+import static br.com.fernando.automationbddframework.support.Generator.evidenciaArquivoWord;
 import static br.com.fernando.automationbddframework.support.Screenshot.screenshotByte;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -14,45 +17,49 @@ import org.apache.poi.xwpf.usermodel.Document;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.junit.Rule;
-import org.junit.rules.TestName;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-
-import br.com.fernando.automationbddframework.pages.Page;
 import br.com.fernando.automationbddframework.support.CustomXWPFDocument;
-import cucumber.api.java.After;
 
 public class BaseSteps {
 	
+	private String testName;
+	
+	public String getTestName() {
+		return testName;
+	}
+
+	public void setTestName(String testName) {
+		this.testName = testName;
+	}
+
 	protected Map<String, String> dadosDoTeste;
 
-	protected String resultadoDoTeste;
+	private String resultadoDoTeste;
+
+	public String getResultadoDoTeste() {
+		return resultadoDoTeste;
+	}
+
+	public void setResultadoDoTeste(String resultadoDoTeste) {
+		this.resultadoDoTeste = resultadoDoTeste;
+	}
 
 	public static FileOutputStream fileOutput = null;
 	public static CustomXWPFDocument evidenciaDocx = null;
 
-	public static ExtentHtmlReporter htmlReporter;
-	public static ExtentReports extent;
-	public static ExtentTest test;
-
-	protected Page page = new Page();
-	
 
 
-	@Rule
-	public TestName testName = new TestName();
+	public void setUpTest() throws IOException {
+		// Gera arquivo de evidencia a partir de um modelo		
+		evidenciaDocx = evidenciaArquivoWord(testName);
+		dadosDoTeste = new HashMap<String, String>();
+		resultadoDoTeste = "Failed";
+	}
 
-	
-
-	@After
 	public void tearDownTest() {
-		extent.flush();
 		try {
 			// Salva a evidência montada em um arquivo word .docx
-			fileOutput = arquivoSaidaDocx(testName.getMethodName(), evidenciaDocx, dadosDoTeste, resultadoDoTeste);
+			fileOutput = arquivoSaidaDocx(testName, evidenciaDocx, dadosDoTeste, resultadoDoTeste);
 			evidenciaDocx.write(fileOutput);
 			// converToPdf(evidenciaDocx, testName.getMethodName());
 			fileOutput.flush();
@@ -63,15 +70,13 @@ public class BaseSteps {
 			}
 
 		} catch (Exception e) {
-			test.fail(e.getMessage());
-	        extent.flush();
 			resultadoDoTeste = "Failed";
 			inserirErroEvidencia(e.toString());
 		}
 
 	}
 
-	protected static void inserirDadosTesteEvidencia(Map dadosDoTeste) {
+	public static void inserirDadosTesteEvidencia(Map dadosDoTeste) {
 
 		Set<Map.Entry<String, String>> set = dadosDoTeste.entrySet();
 		Iterator it = set.iterator();
@@ -88,7 +93,7 @@ public class BaseSteps {
 		}
 	}
 
-	protected static void inserirErroEvidencia(String erro) {
+	public static void inserirErroEvidencia(String erro) {
 		XWPFParagraph par1 = evidenciaDocx.createParagraph();
 		XWPFRun runpar1 = par1.createRun();
 		runpar1.addBreak();
@@ -97,7 +102,7 @@ public class BaseSteps {
 		runpar1.setColor("FF0000");
 	}
 
-	protected static void evidence() throws InvalidFormatException, InterruptedException {
+	public void evidence() throws InvalidFormatException, InterruptedException {
 		int width = (int) (1280 * 0.53);
 		int height = (int) (720 * 0.53);
 		Thread.sleep(500);
@@ -105,7 +110,5 @@ public class BaseSteps {
 		evidenciaDocx.createPicture(blipId, evidenciaDocx.getNextPicNameNumber(Document.PICTURE_TYPE_PNG), width,
 				height);
 	}
-
-	
 
 }

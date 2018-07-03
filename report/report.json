@@ -1,0 +1,226 @@
+[
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#language: pt"
+      }
+    ],
+    "line": 3,
+    "elements": [
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Contexto",
+        "steps": [
+          {
+            "result": {
+              "duration": 95942553,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "que estou na página inicial",
+            "match": {
+              "location": "RealizarPesquisaSteps.queEstouNaPaginaInicial()"
+            },
+            "keyword": "Dado "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 978082938,
+              "status": "passed"
+            },
+            "match": {
+              "location": "RealizarPesquisaSteps.setupTest()"
+            }
+          }
+        ],
+        "line": 16,
+        "name": "Realizar Pesquisa",
+        "description": "",
+        "id": "realizar-pesquisa-no-google;realizar-pesquisa;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 1084348554,
+              "status": "passed"
+            },
+            "match": {
+              "location": "RealizarPesquisaSteps.tearDownTest()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Esquema do Cenário",
+        "steps": [
+          {
+            "result": {
+              "duration": 3866995615,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "eu pesquisar por Cucumber",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Cucumber",
+                  "offset": 17
+                }
+              ],
+              "location": "RealizarPesquisaSteps.euPesquisarPor(String)"
+            },
+            "matchedColumns": [
+              0
+            ],
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "duration": 846802588,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "devo ver resultados de pesquisa sobre Cucumber",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Cucumber",
+                  "offset": 38
+                }
+              ],
+              "location": "RealizarPesquisaSteps.devoVerResultadosDePesquisaSobre(String)"
+            },
+            "matchedColumns": [
+              0
+            ],
+            "keyword": "Então "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@funcionais"
+          }
+        ]
+      },
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Contexto",
+        "steps": [
+          {
+            "result": {
+              "duration": 6357376175,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "que estou na página inicial",
+            "match": {
+              "location": "RealizarPesquisaSteps.queEstouNaPaginaInicial()"
+            },
+            "keyword": "Dado "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 68754840,
+              "status": "passed"
+            },
+            "match": {
+              "location": "RealizarPesquisaSteps.setupTest()"
+            }
+          }
+        ],
+        "line": 17,
+        "name": "Realizar Pesquisa",
+        "description": "",
+        "id": "realizar-pesquisa-no-google;realizar-pesquisa;;3",
+        "after": [
+          {
+            "result": {
+              "duration": 929289291,
+              "status": "passed"
+            },
+            "match": {
+              "location": "RealizarPesquisaSteps.tearDownTest()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Esquema do Cenário",
+        "steps": [
+          {
+            "result": {
+              "duration": 2598269396,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "eu pesquisar por Java Enterprise",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Java Enterprise",
+                  "offset": 17
+                }
+              ],
+              "location": "RealizarPesquisaSteps.euPesquisarPor(String)"
+            },
+            "matchedColumns": [
+              0
+            ],
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "duration": 823548513,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "devo ver resultados de pesquisa sobre Java Enterprise",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Java Enterprise",
+                  "offset": 38
+                }
+              ],
+              "location": "RealizarPesquisaSteps.devoVerResultadosDePesquisaSobre(String)"
+            },
+            "matchedColumns": [
+              0
+            ],
+            "keyword": "Então "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@funcionais"
+          }
+        ]
+      }
+    ],
+    "name": "Realizar Pesquisa no Google",
+    "description": "Como um visitante da página\nEu quero pesquisar um assunto no Google",
+    "id": "realizar-pesquisa-no-google",
+    "keyword": "Funcionalidade",
+    "uri": "src/test/resources/features/realizar_pesquisa.feature",
+    "tags": [
+      {
+        "line": 2,
+        "name": "@funcionais"
+      }
+    ]
+  }
+]

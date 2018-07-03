@@ -18,9 +18,9 @@
 				<version>2.21.0</version>
 				<configuration>
 					<includes>
-						<include>br/com/fernando/automationbddframework/**/*.java</include>
+						<include>br/com/fernando/automationbddframework/runners/*.java</include>
 					</includes>
-					<parallel>all</parallel>
+					<parallel>none</parallel>
 					<threadCount>2</threadCount>
 				</configuration>
 			</plugin>
