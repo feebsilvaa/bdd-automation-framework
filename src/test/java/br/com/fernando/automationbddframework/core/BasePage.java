@@ -331,6 +331,8 @@ public class BasePage {
         return celula.getText();
     }
 
+    
+
     public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela) {
         // procurar coluna do registro
         WebElement tabela = getDriver().findElement(By.id(idTabela));
